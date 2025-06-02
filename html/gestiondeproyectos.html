@@ -9,14 +9,14 @@
     <h1>Gestión de Proyectos de Grado</h1>
 
     <form id="formulario-proyecto">
-        <label for="codigo">Código del Proyecto:</label><br>
-        <input type="text" id="codigo" required><br><br>
+        <label for="codigoProyecto">Código del Proyecto:</label><br>
+        <input type="text" id="codigoProyecto" required><br><br>
 
-        <label for="titulo">Título del Proyecto:</label><br>
-        <input type="text" id="titulo" required><br><br>
+        <label for="tituloProyecto">Título del Proyecto:</label><br>
+        <input type="text" id="tituloProyecto" required><br><br>
 
-        <label for="area">Área de Investigación:</label><br>
-        <select id="area" required>
+        <label for="areaProyecto">Área de Investigación:</label><br>
+        <select id="areaProyecto" required>
             <option value="">Seleccione una opción</option>
             <option value="Tecnología">Tecnología</option>
             <option value="Salud">Salud</option>
@@ -25,42 +25,16 @@
             <option value="Negocios">Negocios</option>
         </select><br><br>
 
-        <label for="estado">Estado del Proyecto:</label><br>
-        <select id="estado" required>
-            <option value="">Seleccione un estado</option>
-            <option value="En Desarrollo">En Desarrollo</option>
-            <option value="En Revisión">En Revisión</option>
-            <option value="Finalizado">Finalizado</option>
-            <option value="Cancelado">Cancelado</option>
-        </select><br><br>
+        <label>Estado del Proyecto:</label><br>
+        <input type="radio" name="estado" value="En Desarrollo"> En Desarrollo<br>
+        <input type="radio" name="estado" value="En Revisión"> En Revisión<br>
+        <input type="radio" name="estado" value="Finalizado"> Finalizado<br>
+        <input type="radio" name="estado" value="Cancelado"> Cancelado<br><br>
 
-        <button type="submit">Guardar Proyecto</button>
+        <button type="button" id="guardarProyecto">Guardar Proyecto</button>
     </form>
-
-    <h2>Lista de Proyectos</h2>
-    <table>
-        <thead>
-            <tr>
-                <th>Código</th>
-                <th>Título</th>
-                <th>Área</th>
-                <th>Estado</th>
-            </tr>
-        </thead>
-        <tbody id="lista-proyectos">
-            
-        </tbody>
-    </table>
 
     <script src="../js/proyecto.js"></script>
     <script src="../js/gestionproyecto.js"></script>
-
-    <script>
-
-        document.getElementById("formulario-proyecto").addEventListener("submit", function(event) {
-            event.preventDefault();
-            guardarProyecto();     
-        });
-    </script>
 </body>
 </html>

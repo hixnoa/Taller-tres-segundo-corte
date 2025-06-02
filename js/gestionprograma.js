@@ -1,54 +1,29 @@
-function guardarPrograma() {
-    const codigo = document.getElementById("codigo").value.trim();
-    const nombre = document.getElementById("nombre").value.trim();
-    const duracion = document.getElementById("duracion").value.trim();
-    const modalidad = document.getElementById("modalidad").value;
+document.addEventListener("DOMContentLoaded", () => {
+    const botonGuardar = document.getElementById("guardarProyecto");
 
-    if (!codigo || !nombre || !duracion || !modalidad) {
-        alert("Todos los campos son obligatorios.");
-        return;
-    }
+    botonGuardar.addEventListener("click", () => {
+        const codigo = document.getElementById("codigoProyecto").value;
+        const titulo = document.getElementById("tituloProyecto").value;
+        const area = document.getElementById("areaProyecto").value;
+        const estado = document.querySelector('input[name="estado"]:checked')?.value || "";
 
-    const programas = obtenerProgramas();
+        const proyecto = new Proyecto(codigo, titulo, area, estado);
 
-    if (programas.some(p => p.codigo === codigo)) {
-        alert("Ya existe un programa con ese código.");
-        return;
-    }
+        let proyectos = JSON.parse(localStorage.getItem("proyectos")) || [];
+        proyectos.push(proyecto);
+        localStorage.setItem("proyectos", JSON.stringify(proyectos));
 
-    if (programas.some(p => p.nombre.toLowerCase() === nombre.toLowerCase())) {
-        alert("Ya existe un programa con ese nombre.");
-        return;
-    }
-
-    const nuevo = new Programa(codigo, nombre, duracion, modalidad);
-    programas.push(nuevo);
-    localStorage.setItem("programas", JSON.stringify(programas));
-    limpiarFormulario();
-    mostrarProgramas();
-}
-
-function obtenerProgramas() {
-    return JSON.parse(localStorage.getItem("programas")) || [];
-}
-
-function mostrarProgramas() {
-    const tabla = document.getElementById("tablaProgramas");
-    tabla.innerHTML = "";
-    const programas = obtenerProgramas();
-
-    programas.forEach(programa => {
-        const fila = document.createElement("tr");
-        fila.innerHTML = `
-            <td>${programa.codigo}</td>
-            <td>${programa.nombre}</td>
-            <td>${programa.duracion}</td>
-            <td>${programa.modalidad}</td>
-        `;
-        tabla.appendChild(fila);
+        console.clear();
+        console.log("Lista de proyectos guardados en localStorage:");
+        console.log(proyectos);
     });
-}
+});
 
-function limpiarFormulario() {
-    document.getElementById("formularioPrograma").reset();
+class Proyecto {
+    constructor(codigo, titulo, area, estado) {
+        this.codigo = codigo;
+        this.titulo = titulo;
+        this.area = area;
+        this.estado = estado;
+    }
 }
